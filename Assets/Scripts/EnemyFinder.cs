@@ -2,10 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Used by the player to find enemies, also calls the move function for the enemies
+
 public class EnemyFinder : MonoBehaviour
 {
+
+    private List<Enemy> enemyList;
     [SerializeField]
-    private List<GameObject> enemyList;
+    private GameObject player;
+
+    void Start()
+    {
+        enemyList = new List<Enemy>();
+    }
+
+    void Update()
+    {
+        if (enemyList.Count != 0)
+        {
+            foreach (Enemy toMove in enemyList)
+            {
+                toMove.moveEnemy(player.transform);
+                toMove.checkDeath();
+            }
+        }
+    }
 
     public Transform getClosestEnemy(Transform playerPos)
     {
@@ -13,13 +34,13 @@ public class EnemyFinder : MonoBehaviour
         {
             float lowestDistance = Mathf.Infinity;
             Transform closestEnemy = null;
-            foreach (GameObject i in enemyList)
+            foreach (Enemy i in enemyList)
             {
-                float distance = Vector3.Distance(i.transform.position, playerPos.position);
+                float distance = Vector3.Distance(i.enemyObject.transform.position, playerPos.position);
                 if (distance < lowestDistance)
                 {
                     lowestDistance = distance;
-                    closestEnemy = i.transform;
+                    closestEnemy = i.enemyObject.transform;
                 }
             }
             return closestEnemy;
@@ -34,21 +55,14 @@ public class EnemyFinder : MonoBehaviour
     public void recompileList()
     {
         enemyList.Clear();
-        foreach(Transform enemy in transform)
-        {
-            if(enemy.tag == "Enemy")
-            {
-                enemyList.Add(enemy.gameObject);
-            }
-        }
     }
 
-    public void addEnemy(GameObject newEnemy)
+    public void addEnemy(Enemy newEnemy)
     {
         enemyList.Add(newEnemy);
     }
 
-    public void removeEnemy(GameObject deadEnemy)
+    public void removeEnemy(Enemy deadEnemy)
     {
         enemyList.Remove(deadEnemy);
     }

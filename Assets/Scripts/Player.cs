@@ -27,8 +27,6 @@ public class Player : MonoBehaviour
     void Start()
     {
         playerWeapons = new List<Weapon>();
-        enemyFinder.recompileList();
-        Debug.Log(enemyFinder.getClosestEnemy(transform));
     }
 
     // Update is called once per frame
