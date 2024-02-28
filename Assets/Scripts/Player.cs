@@ -23,10 +23,15 @@ public class Player : MonoBehaviour
     private List<Weapon> playerWeapons;
     [SerializeField]
     private EnemyFinder enemyFinder;
+    [SerializeField]
+    private GameObject projectilePrefab;
+    private float fireCounter; //ups every second, checks if modulus is fire rate
+    private float lastFired = 1000;
 
     void Start()
     {
         playerWeapons = new List<Weapon>();
+        playerWeapons.Add(new Weapon(2, 2, projectilePrefab));
     }
 
     // Update is called once per frame
@@ -38,6 +43,22 @@ public class Player : MonoBehaviour
         movement = new Vector3(horizontal, vertical, 0f);
 
         transform.position += movement * speed * Time.deltaTime;
+
+        fireCounter += Time.deltaTime;
+ 
+        if(Mathf.RoundToInt(fireCounter) != lastFired)
+        {
+            foreach (Weapon w in playerWeapons)
+            {
+                if (enemyFinder.getClosestEnemy(transform) != null)
+                {
+                    w.fireAtEnemy(enemyFinder.getClosestEnemy(transform).position, transform, Mathf.RoundToInt(fireCounter));
+                    lastFired = Mathf.RoundToInt(fireCounter);
+                    Debug.Log("trying to fire");
+                }
+            }
+        }
+
     }
 
     void addWeapon(float damage, float delay, GameObject projectile)

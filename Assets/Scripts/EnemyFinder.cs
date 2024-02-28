@@ -40,6 +40,7 @@ public class EnemyFinder : MonoBehaviour
                 if (distance < lowestDistance)
                 {
                     lowestDistance = distance;
+                    Debug.Log(lowestDistance);
                     closestEnemy = i.enemyObject.transform;
                 }
             }
