@@ -33,11 +33,13 @@ public class Enemy
         }
     }
 
-    public void OnCollisionEnter(Collision other)
+    public void OnCollisionEnter2D(Collision2D other)
     {
-        if(other.gameObject.tag == "Bullet")
+        if(other.gameObject.tag == "Projectile")
         {
-
+            projectileBehavior bullet = other.gameObject.GetComponent<projectileBehavior>();
+            this.health -= bullet.damage;
+            GameObject.Destroy(other.gameObject);
         }
     }
 }

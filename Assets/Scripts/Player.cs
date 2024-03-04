@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
     {
         playerWeapons = new List<Weapon>();
         playerWeapons.Add(new Weapon(2, 2, projectilePrefab));
+        playerWeapons.Add(new Shotgun(2, 3, projectilePrefab, 2));
     }
 
     // Update is called once per frame

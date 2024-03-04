@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class projectileBehavior : MonoBehaviour
 {
-    [SerializeField]
-    private float bulletSpeed;
+    private float destroyTimer = 2;
+    private float destroyCounter = 0;
+    public float damage;
 
     void Update()
     {
-        this.transform.position += transform.forward * bulletSpeed * Time.deltaTime;
+        destroyCounter += Time.deltaTime;
+        if(destroyCounter > destroyTimer)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class enemyCollision : MonoBehaviour
 {
-    private Enemy myEnemy;
+    public Enemy myEnemy;
 
-
-
-    void OnCollisionEnter(Collision other)
+    void OnCollisionEnter2D(Collision2D other)
     {
-        myEnemy.OnCollisionEnter(other);
+        myEnemy.OnCollisionEnter2D(other);
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class EnemyFinder : MonoBehaviour
 {
-
+    [SerializeField]
     private List<Enemy> enemyList;
     [SerializeField]
     private GameObject player;
@@ -40,7 +40,6 @@ public class EnemyFinder : MonoBehaviour
                 if (distance < lowestDistance)
                 {
                     lowestDistance = distance;
-                    Debug.Log(lowestDistance);
                     closestEnemy = i.enemyObject.transform;
                 }
             }
@@ -58,9 +57,10 @@ public class EnemyFinder : MonoBehaviour
         enemyList.Clear();
     }
 
-    public void addEnemy(Enemy newEnemy)
+    public Enemy addEnemy(Enemy newEnemy)
     {
         enemyList.Add(newEnemy);
+        return newEnemy;
     }
 
     public void removeEnemy(Enemy deadEnemy)
