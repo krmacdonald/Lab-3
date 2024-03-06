@@ -9,10 +9,8 @@ public class Healthbar : MonoBehaviour
     [SerializeField]
     private Player playerScript;
     
-
-    // Update is called once per frame
     void Update()
     {
-        greenHealth.sizeDelta = new Vector2(playerScript.health, 100);
+        greenHealth.sizeDelta = new Vector2(playerScript.health, 22.6f);
     }
 }
