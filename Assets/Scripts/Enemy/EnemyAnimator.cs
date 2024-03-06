@@ -11,6 +11,7 @@ public class EnemyAnimator : MonoBehaviour
     private float delay;
     private SpriteRenderer Sprite;
     private int currentIndex;
+    private float damageCD = 0;
 
     void Start()
     {
@@ -20,6 +21,15 @@ public class EnemyAnimator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        damageCD -= Time.deltaTime;
+        if(damageCD < 0)
+        {
+            Sprite.color = new Color(255, 255, 255);
+        }
+        else
+        {
+            Sprite.color = new Color(255, 0, 0);
+        }
         counter += Time.deltaTime;
         if (counter > delay)
         {
@@ -35,6 +45,19 @@ public class EnemyAnimator : MonoBehaviour
                 Sprite.sprite = enemySprites[currentIndex];
                 counter = 0;
             }
+        }
+    }
+
+    private void dealDamage()
+    {
+        damageCD = .2f;
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if(other.gameObject.tag == "Projectile")
+        {
+            dealDamage();
         }
     }
 }

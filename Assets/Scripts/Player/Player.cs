@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField]
     private float speed;
+    public float health = 100;
     private float horizontal;
     private float vertical;
 
@@ -30,8 +31,8 @@ public class Player : MonoBehaviour
 
     void Start() {
         playerWeapons = new List<Weapon>();
-        playerWeapons.Add(new Weapon(2, 2, projectilePrefab));
-        playerWeapons.Add(new Shotgun(2, 3, projectilePrefab, 2));
+        //playerWeapons.Add(new Weapon(2, 2, projectilePrefab));
+        //playerWeapons.Add(new Shotgun(2, 3, projectilePrefab, 2));
         playerWeapons.Add(new SMG(1, 1, projectilePrefab));
     }
 

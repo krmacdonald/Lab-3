@@ -6,6 +6,7 @@ public class Weapon
 {
     public float damage;
     public float delay;
+    private float counter;
     public GameObject projectile;
     private GameObject itemToFire;
     private Rigidbody2D itemRB;
@@ -19,6 +20,7 @@ public class Weapon
 
     public virtual void fireAtEnemy(Vector2 enemyPos, Transform playerPos, float uniDelay)
     {
+        counter += Time.deltaTime;
         if (uniDelay % delay == 0)
         {
             itemToFire = GameObject.Instantiate(projectile, playerPos);
